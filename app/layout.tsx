@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -25,11 +25,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-zinc-50 text-zinc-900 antialiased">
-        <Header />
-        <div className="flex-1">{children}</div>
-        <Footer />
+    <html
+      lang="en"
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full`}
+    >
+      <body className="min-h-full overflow-x-hidden bg-page-bg font-sans text-text antialiased">
+        {children}
       </body>
     </html>
   );

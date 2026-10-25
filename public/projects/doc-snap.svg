@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-label="Doc Snap project screenshot placeholder">
+  <rect width="800" height="500" fill="#101828"/>
+  <rect x="48" y="48" width="704" height="404" rx="12" fill="#1D2939"/>
+  <text x="72" y="100" font-family="ui-monospace,monospace" font-size="14" fill="#98A2B3">$ doc-snap build --spec openapi.yaml</text>
+  <text x="72" y="132" font-family="ui-monospace,monospace" font-size="14" fill="#32D583"> Static docs generated</text>
+  <text x="400" y="470" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#98A2B3">Doc Snap  screenshot placeholder</text>
+</svg>

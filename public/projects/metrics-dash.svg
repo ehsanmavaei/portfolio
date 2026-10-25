@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-label="Metrics Dash project screenshot placeholder">
+  <rect width="800" height="500" fill="#F2F4F7"/>
+  <rect x="48" y="48" width="704" height="404" rx="12" fill="#FFFFFF" stroke="#EAECF0"/>
+  <polyline points="80,380 180,300 280,320 380,220 480,260 580,180 680,200" fill="none" stroke="#2F5BEA" stroke-width="4"/>
+  <rect x="80" y="80" width="160" height="72" rx="8" fill="#E3F4EC"/>
+  <rect x="260" y="80" width="160" height="72" rx="8" fill="#F2F4F7"/>
+  <text x="400" y="470" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#475467">Metrics Dash  screenshot placeholder</text>
+</svg>
