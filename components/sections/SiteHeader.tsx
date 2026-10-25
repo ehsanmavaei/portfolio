@@ -10,7 +10,13 @@ import { isFilled, site } from "@/config/site";
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
-const sectionIds = ["projects", "skills", "experience", "contact"] as const;
+const sectionIds = [
+  "skills",
+  "services",
+  "projects",
+  "experience",
+  "contact",
+] as const;
 
 export function SiteHeader({ locale, dict }: LocaleDictProps) {
   const [menuOpen, setMenuOpen] = useState(false);

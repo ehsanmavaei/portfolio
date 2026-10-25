@@ -1,11 +1,12 @@
 {
   "meta": {
     "title": "Ehsan Mavaei | Founder & Full Stack Developer",
-    "description": "Ehsan Mavaei — full stack & Next.js developer, founder of Mavito café and restaurant software in Iran. Open to full-time and freelance work."
+    "description": "Full-stack developer and founder of Mavito (café & restaurant SaaS). React, Next.js, TypeScript, Node.js, MongoDB. Open to international full-time roles and freelance projects."
   },
   "nav": {
     "projects": "Projects",
     "skills": "Skills",
+    "services": "Services",
     "experience": "Experience",
     "contact": "Contact",
     "resume": "Résumé",
@@ -29,7 +30,7 @@
   },
   "skills": {
     "heading": "Tech stack",
-    "intro": "Tools I use to build and operate Mavito and client work.",
+    "intro": "Technologies I use to build and operate Mavito in production.",
     "frontend": "Frontend",
     "backend": "Backend",
     "data": "Data",
@@ -42,22 +43,20 @@
     "requestWalkthrough": "Request a walkthrough",
     "sourcePrivate": "Source code is private.",
     "problemTitle": "The problem",
-    "problemBody": "Café and restaurant owners need ordering, kitchen, inventory, and finances in one fast system.",
+    "problemBody": "Café and restaurant owners need ordering, kitchen, inventory, and finances in one fast system instead of disconnected tools.",
+    "usersTitle": "Who it’s for",
     "roleTitle": "My role",
     "roleBody": "Sole developer and founder: product, design, frontend, backend, database, deployment, and operations.",
     "stackTitle": "Stack",
-    "featuresTitle": "Features",
-    "features": [
-      "QR digital menu with branded design",
-      "Table ordering and online ordering",
-      "Kitchen display (KDS) with live order status and timers",
-      "Waiter tablet ordering with item notes and split payment",
-      "Inventory with recipes and automatic raw-material deduction and low-stock alerts",
-      "Customer club with loyalty points and campaigns",
-      "Finance: cashier, expenses, profit and loss, daily and monthly reports",
-      "Table management and reservations",
-      "Role-based users and access levels"
-    ],
+    "architectureTitle": "How it fits together",
+    "orderFlowTitle": "Order flow (simplified)",
+    "challengesTitle": "Technical challenges",
+    "deploymentTodoTitle": "Deployment (your input)",
+    "featuresTitle": "Features by status",
+    "featuresProduction": "In production",
+    "featuresPartial": "Partial or in progress",
+    "featuresPartialEmpty": "None listed yet—add items here when you want to show work in progress.",
+    "featuresPlanned": "Planned or unverified",
     "openScreenshot": "Open screenshot",
     "lightboxClose": "Close image preview",
     "browserUrl": "mavito.ir"
@@ -70,8 +69,10 @@
   },
   "contact": {
     "heading": "Let's work together",
-    "body": "The fastest way to reach me is by email.",
-    "emailButton": "Email me"
+    "body": "Email is the fastest way to reach me. Choose the option that matches your inquiry.",
+    "emailButton": "Email me",
+    "fullTimeButton": "Full-time opportunity",
+    "freelanceButton": "Freelance project"
   },
   "footer": {
     "builtWith": "Built with Next.js and Tailwind CSS."

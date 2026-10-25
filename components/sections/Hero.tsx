@@ -6,7 +6,7 @@ const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 export function Hero({ locale, dict }: SectionProps) {
-  const [stackPrimary, stackBackend, stackDatabase, stackOps] = site.codeStack;
+  const [frontend, react, typescript, backend, database] = site.codeStack;
 
   return (
     <section
@@ -29,7 +29,7 @@ export function Hero({ locale, dict }: SectionProps) {
             </span>
           </h1>
           <p className="mt-4 max-w-full break-words text-pretty text-base leading-relaxed text-text-muted sm:text-lg">
-            {site.seo.leadParagraph[locale]}
+            {site.heroPitch[locale]}
           </p>
           <div className="mt-8 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
@@ -100,10 +100,10 @@ export function Hero({ locale, dict }: SectionProps) {
             dir="ltr"
           >
             <code className="block min-w-0 whitespace-pre">{`const stack = {
-  frontend: "${stackPrimary}",
-  backend: "${stackBackend}",
-  database: "${stackDatabase}",
-  operations: "${stackOps}",
+  frontend: "${frontend} + ${react}",
+  language: "${typescript}",
+  backend: "${backend}",
+  database: "${database}",
 };`}</code>
           </pre>
         </aside>

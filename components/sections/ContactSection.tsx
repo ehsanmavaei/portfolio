@@ -8,6 +8,9 @@ const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
 export function ContactSection({ locale, dict }: SectionProps) {
+  const fullTimeHref = `mailto:${site.email}?subject=${encodeURIComponent(site.contactSubjects.fullTime[locale])}`;
+  const freelanceHref = `mailto:${site.email}?subject=${encodeURIComponent(site.contactSubjects.freelance[locale])}`;
+
   return (
     <>
       <SectionShell id="contact" aria-labelledby="contact-heading">
@@ -21,13 +24,27 @@ export function ContactSection({ locale, dict }: SectionProps) {
           <p className="mx-auto mt-4 max-w-lg text-base text-[#D0D5DD]">
             {dict.contact.body}
           </p>
-          <a
-            href={`mailto:${site.email}`}
-            aria-label={dict.contact.emailButton}
-            className={`mt-8 inline-flex min-h-11 max-w-full items-center justify-center break-all rounded-[8px] bg-white px-6 text-sm font-semibold text-text hover:bg-[#F2F4F7] ${focusRing}`}
-          >
-            <bdi dir="ltr">{site.email}</bdi>
-          </a>
+          <div className="mt-8 flex w-full min-w-0 flex-col items-stretch gap-3 sm:mx-auto sm:max-w-md">
+            <a
+              href={`mailto:${site.email}`}
+              aria-label={dict.contact.emailButton}
+              className={`inline-flex min-h-11 w-full items-center justify-center break-all rounded-[8px] bg-white px-6 text-sm font-semibold text-text hover:bg-[#F2F4F7] ${focusRing}`}
+            >
+              <bdi dir="ltr">{site.email}</bdi>
+            </a>
+            <a
+              href={fullTimeHref}
+              className={`inline-flex min-h-11 w-full items-center justify-center rounded-[8px] border border-[#475467] px-6 text-sm font-semibold text-white hover:border-white ${focusRing}`}
+            >
+              {dict.contact.fullTimeButton}
+            </a>
+            <a
+              href={freelanceHref}
+              className={`inline-flex min-h-11 w-full items-center justify-center rounded-[8px] border border-[#475467] px-6 text-sm font-semibold text-white hover:border-white ${focusRing}`}
+            >
+              {dict.contact.freelanceButton}
+            </a>
+          </div>
           {isFilled(site.instagram) ? (
             <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
               <InstagramLink label={dict.hero.instagram} variant="contact" />

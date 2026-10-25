@@ -1,6 +1,7 @@
 import type { Locale } from "@/config/site";
 import {
   absoluteUrl,
+  getKnowsAbout,
   getPersonSameAs,
   site,
   siteUrl,
@@ -31,7 +32,7 @@ export function buildStructuredDataGraph(
     ...(personImage ? { image: personImage } : {}),
     email: site.email,
     description: site.seo.description[locale],
-    knowsAbout: [...site.codeStack],
+    knowsAbout: getKnowsAbout(),
     sameAs: getPersonSameAs(),
     worksFor: {
       "@type": "Organization",
