@@ -1,15 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useId, useState, type MouseEvent } from "react";
-import { sectionNav, siteConfig } from "@/lib/site";
+import { useEffect, useId, useState } from "react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import type { LocaleDictProps } from "@/components/types";
+import { isFilled, site } from "@/config/site";
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
-export function SiteHeader() {
+const sectionIds = ["projects", "skills", "experience", "contact"] as const;
+
+export function SiteHeader({ locale, dict }: LocaleDictProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuId = useId();
+  const showResume = isFilled(site.resumeUrl);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -27,77 +33,88 @@ export function SiteHeader() {
     };
   }, [menuOpen]);
 
-  const resumeIsPlaceholder = siteConfig.resumeHref.startsWith("[Placeholder");
+  const navItems = sectionIds.map((id) => ({
+    href: `#${id}`,
+    label: dict.nav[id],
+  }));
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-card-bg/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1120px] items-center justify-between gap-4 px-6 py-3">
+    <header className="sticky top-0 z-50 w-full max-w-full min-w-0 border-b border-border bg-card-bg/85 backdrop-blur-md">
+      <div className="mx-auto flex w-full max-w-[1120px] min-w-0 items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-6">
         <Link
-          href="/"
-          className={`inline-flex min-h-11 items-center text-lg font-semibold text-text ${focusRing} rounded-[8px]`}
+          href={`/${locale}/#top`}
+          className={`inline-flex min-h-11 min-w-0 max-w-[55%] shrink-[1] items-center gap-2 text-base font-semibold text-text sm:max-w-none sm:gap-2.5 sm:text-lg ${focusRing} rounded-[8px]`}
         >
-          {siteConfig.name}
-          <span className="text-accent" aria-hidden="true">
-            .
+          <Image
+            src="/logo.svg"
+            alt={dict.nav.primary}
+            width={32}
+            height={32}
+            className="size-8 shrink-0 rounded-[8px]"
+            unoptimized
+          />
+          <span className="truncate">
+            {site.name[locale]}
+            <span className="text-accent" aria-hidden="true">
+              .
+            </span>
           </span>
         </Link>
 
-        <nav
-          className="hidden items-center gap-1 md:flex"
-          aria-label="Primary"
-        >
-          {sectionNav.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              className={`inline-flex min-h-11 items-center rounded-[8px] px-3 text-sm font-medium text-text-muted transition-colors hover:text-text ${focusRing}`}
-            >
-              {label}
-            </a>
-          ))}
-          <a
-            href={resumeIsPlaceholder ? "#" : siteConfig.resumeHref}
-            className={`ml-2 inline-flex min-h-11 items-center rounded-[8px] border border-border px-4 text-sm font-medium text-text transition-colors hover:border-accent hover:text-accent ${focusRing}`}
-            {...(resumeIsPlaceholder
-              ? {
-                  "aria-disabled": true,
-                  title: siteConfig.resumeHref,
-                  onClick: (event: MouseEvent<HTMLAnchorElement>) =>
-                    event.preventDefault(),
-                }
-              : {
-                  target: "_blank",
-                  rel: "noopener noreferrer",
-                })}
-          >
-            Résumé
-          </a>
-        </nav>
+        <div className="hidden min-w-0 items-center gap-2 md:flex">
+          <nav className="flex items-center gap-1" aria-label={dict.nav.primary}>
+            {navItems.map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                className={`inline-flex min-h-11 items-center rounded-[8px] px-3 text-sm font-medium text-text-muted transition-colors hover:text-text ${focusRing}`}
+              >
+                {label}
+              </a>
+            ))}
+            {showResume ? (
+              <a
+                href={site.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`ms-2 inline-flex min-h-11 items-center rounded-[8px] border border-border px-4 text-sm font-medium text-text transition-colors hover:border-accent hover:text-accent ${focusRing}`}
+              >
+                {dict.nav.resume}
+              </a>
+            ) : null}
+          </nav>
+          <LanguageSwitcher locale={locale} labels={dict.lang} className="ms-2 shrink-0" />
+        </div>
 
-        <button
-          type="button"
-          className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-[8px] border border-border text-text md:hidden ${focusRing}`}
-          aria-expanded={menuOpen}
-          aria-controls={menuId}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
-          <span aria-hidden="true" className="flex flex-col gap-1.5">
-            <span className="block h-0.5 w-5 bg-text" />
-            <span className="block h-0.5 w-5 bg-text" />
-            <span className="block h-0.5 w-5 bg-text" />
-          </span>
-        </button>
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2 md:hidden">
+          <LanguageSwitcher locale={locale} labels={dict.lang} compact />
+          <button
+            type="button"
+            className={`inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-[8px] border border-border text-text ${focusRing}`}
+            aria-expanded={menuOpen}
+            aria-controls={menuId}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="sr-only">
+              {menuOpen ? dict.nav.closeMenu : dict.nav.openMenu}
+            </span>
+            <span aria-hidden="true" className="flex flex-col gap-1.5">
+              <span className="block h-0.5 w-5 bg-text" />
+              <span className="block h-0.5 w-5 bg-text" />
+              <span className="block h-0.5 w-5 bg-text" />
+            </span>
+          </button>
+        </div>
       </div>
 
       {menuOpen ? (
         <nav
           id={menuId}
-          className="border-t border-border bg-card-bg px-6 py-4 md:hidden"
-          aria-label="Primary mobile"
+          className="border-t border-border bg-card-bg px-4 py-4 md:hidden sm:px-6"
+          aria-label={dict.nav.primary}
         >
           <ul className="flex flex-col gap-1">
-            {sectionNav.map(({ href, label }) => (
+            {navItems.map(({ href, label }) => (
               <li key={href}>
                 <a
                   href={href}
@@ -108,21 +125,19 @@ export function SiteHeader() {
                 </a>
               </li>
             ))}
-            <li>
-              <a
-                href={resumeIsPlaceholder ? "#" : siteConfig.resumeHref}
-                className={`mt-2 flex min-h-11 items-center justify-center rounded-[8px] border border-border px-4 text-base font-medium text-text ${focusRing}`}
-                onClick={(event) => {
-                  if (resumeIsPlaceholder) event.preventDefault();
-                  setMenuOpen(false);
-                }}
-                {...(resumeIsPlaceholder
-                  ? { "aria-disabled": true, title: siteConfig.resumeHref }
-                  : { target: "_blank", rel: "noopener noreferrer" })}
-              >
-                Résumé
-              </a>
-            </li>
+            {showResume ? (
+              <li>
+                <a
+                  href={site.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`mt-2 flex min-h-11 items-center justify-center rounded-[8px] border border-border px-4 text-base font-medium text-text ${focusRing}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {dict.nav.resume}
+                </a>
+              </li>
+            ) : null}
           </ul>
         </nav>
       ) : null}

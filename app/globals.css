@@ -49,6 +49,29 @@ body {
   background: var(--page-bg);
   color: var(--text);
   font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+img:not([data-nimg="fill"]),
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+pre {
+  max-width: 100%;
+}
+
+.font-fa {
+  font-family: var(--font-vazirmatn), var(--font-inter), system-ui, sans-serif;
+}
+
+.font-sans {
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
 :focus-visible {

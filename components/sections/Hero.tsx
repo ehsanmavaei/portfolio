@@ -1,119 +1,109 @@
-import { developerSnippet } from "@/data/stack";
-import { siteConfig } from "@/lib/site";
+import { InstagramLink } from "@/components/social/InstagramLink";
+import type { SectionProps } from "@/components/types";
+import { isFilled, site } from "@/config/site";
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
-function splitIntro(intro: string) {
-  const parts = intro.split(/(?<=\.)\s+/);
-  return {
-    headline: parts[0] ?? intro,
-    pitch: parts.slice(1).join(" "),
-  };
-}
-
-function HeroHeadline({ text }: { text: string }) {
-  const phrase = siteConfig.heroAccentPhrase;
-  const index = text.toLowerCase().indexOf(phrase.toLowerCase());
-
-  if (index === -1) {
-    return <span>{text}</span>;
-  }
-
-  const before = text.slice(0, index);
-  const match = text.slice(index, index + phrase.length);
-  const after = text.slice(index + phrase.length);
+export function Hero({ locale, dict }: SectionProps) {
+  const [stackPrimary, stackBackend, stackDatabase, stackOps] = site.codeStack;
 
   return (
-    <>
-      {before}
-      <span className="text-accent">{match}</span>
-      {after}
-    </>
-  );
-}
-
-export function Hero() {
-  const { headline, pitch } = splitIntro(siteConfig.intro);
-  return (
-    <section aria-labelledby="hero-heading" className="bg-page-bg">
-      <div className="mx-auto grid max-w-[1120px] gap-12 px-6 py-[72px] lg:grid-cols-2 lg:items-center">
-        <div>
-          {siteConfig.availableForRoles ? (
-            <p className="inline-flex min-h-11 items-center rounded-full bg-success-bg px-3 py-1 text-sm font-medium text-success-text">
-              Available for new roles
-            </p>
-          ) : null}
+    <section
+      id="hero"
+      aria-labelledby="hero-heading"
+      className="w-full max-w-full min-w-0 bg-page-bg"
+    >
+      <div className="mx-auto grid w-full max-w-[1120px] min-w-0 grid-cols-1 gap-8 px-4 py-12 sm:px-6 sm:py-16 md:grid-cols-2 md:items-center md:gap-12 md:py-[72px]">
+        <div className="order-2 min-w-0 w-full max-w-full md:order-1">
+          <p className="max-w-full rounded-full bg-success-bg px-3 py-2 text-sm font-medium leading-snug text-success-text whitespace-normal">
+            {site.availability[locale]}
+          </p>
           <h1
             id="hero-heading"
-            className="mt-4 text-[2.5rem] font-extrabold leading-[1.15] tracking-tight text-text sm:text-[3.5rem]"
+            className="mt-4 max-w-full break-words text-pretty text-[clamp(1.75rem,6vw,3.5rem)] font-extrabold leading-[1.15] tracking-tight text-text"
           >
-            <HeroHeadline text={headline} />
+            {site.name[locale]}
+            <span className="mt-1 block text-[clamp(1.125rem,4vw,2rem)] font-bold text-accent">
+              {site.title[locale]}
+            </span>
           </h1>
-          {pitch ? (
-            <p className="mt-4 max-w-xl text-lg text-text-muted">{pitch}</p>
-          ) : null}
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <p className="mt-4 max-w-full break-words text-pretty text-base leading-relaxed text-text-muted sm:text-lg">
+            {site.seo.leadParagraph[locale]}
+          </p>
+          <div className="mt-8 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a
               href="#projects"
-              className={`inline-flex min-h-11 items-center justify-center rounded-[8px] bg-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-[#2548c7] ${focusRing}`}
+              className={`inline-flex min-h-11 w-full items-center justify-center rounded-[8px] bg-accent px-5 text-sm font-semibold text-white transition-colors hover:bg-[#2548c7] sm:w-auto ${focusRing}`}
             >
-              View my work
+              {dict.hero.viewWork}
             </a>
             <a
               href="#contact"
-              className={`inline-flex min-h-11 items-center justify-center rounded-[8px] border border-border bg-card-bg px-5 text-sm font-semibold text-text transition-colors hover:border-accent hover:text-accent ${focusRing}`}
+              className={`inline-flex min-h-11 w-full items-center justify-center rounded-[8px] border border-border bg-card-bg px-5 text-sm font-semibold text-text transition-colors hover:border-accent hover:text-accent sm:w-auto ${focusRing}`}
             >
-              Get in touch
+              {dict.hero.getInTouch}
             </a>
           </div>
-          <ul className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm">
-            <li>
+          <ul className="mt-6 flex min-w-0 flex-wrap gap-x-4 gap-y-2 text-sm">
+            {isFilled(site.github) ? (
+              <li className="min-w-0 max-w-full">
+                <a
+                  href={site.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex min-h-11 max-w-full items-center break-words text-text-muted underline-offset-4 hover:text-text hover:underline ${focusRing} rounded-[8px]`}
+                >
+                  {dict.hero.github}
+                </a>
+              </li>
+            ) : null}
+            {isFilled(site.linkedin) ? (
+              <li className="min-w-0 max-w-full">
+                <a
+                  href={site.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex min-h-11 max-w-full items-center break-words text-text-muted underline-offset-4 hover:text-text hover:underline ${focusRing} rounded-[8px]`}
+                >
+                  {dict.hero.linkedin}
+                </a>
+              </li>
+            ) : null}
+            {isFilled(site.instagram) ? (
+              <li className="min-w-0 max-w-full">
+                <InstagramLink label={dict.hero.instagram} variant="hero" />
+              </li>
+            ) : null}
+            <li className="min-w-0 max-w-full">
               <a
-                href={siteConfig.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`min-h-11 inline-flex items-center text-text-muted underline-offset-4 hover:text-text hover:underline ${focusRing} rounded-[8px]`}
+                href={`mailto:${site.email}`}
+                className={`inline-flex min-h-11 max-w-full items-center break-all text-text-muted underline-offset-4 hover:text-text hover:underline ${focusRing} rounded-[8px]`}
               >
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a
-                href={siteConfig.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`min-h-11 inline-flex items-center text-text-muted underline-offset-4 hover:text-text hover:underline ${focusRing} rounded-[8px]`}
-              >
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className={`min-h-11 inline-flex items-center text-text-muted underline-offset-4 hover:text-text hover:underline ${focusRing} rounded-[8px]`}
-              >
-                Email
+                <bdi dir="ltr">{dict.hero.email}</bdi>
               </a>
             </li>
           </ul>
         </div>
 
         <aside
-          className="rounded-[16px] bg-dark-card p-6 text-[#E4E7EC] shadow-[var(--shadow-code)]"
-          aria-label="Developer profile snippet"
+          className="order-1 min-w-0 w-full max-w-full rounded-[16px] bg-dark-card p-4 text-[#E4E7EC] shadow-[var(--shadow-code)] sm:p-6 md:order-2"
+          aria-label={dict.hero.codeCardLabel}
         >
           <div className="mb-4 flex gap-2" aria-hidden="true">
-            <span className="size-3 rounded-full bg-[#F97066]" />
-            <span className="size-3 rounded-full bg-[#FDB022]" />
-            <span className="size-3 rounded-full bg-[#32D583]" />
+            <span className="size-3 shrink-0 rounded-full bg-[#F97066]" />
+            <span className="size-3 shrink-0 rounded-full bg-[#FDB022]" />
+            <span className="size-3 shrink-0 rounded-full bg-[#32D583]" />
           </div>
-          <pre className="overflow-x-auto font-mono text-sm leading-relaxed">
-            <code>{`const developer = {
-  role: "${developerSnippet.role}",
-  frontend: [${developerSnippet.frontend.map((t) => `"${t}"`).join(", ")}],
-  backend: [${developerSnippet.backend.map((t) => `"${t}"`).join(", ")}],
-  focus: "${developerSnippet.focus}",
+          <pre
+            className="max-w-full overflow-x-auto font-mono text-xs leading-relaxed sm:text-sm"
+            dir="ltr"
+          >
+            <code className="block min-w-0 whitespace-pre">{`const stack = {
+  frontend: "${stackPrimary}",
+  backend: "${stackBackend}",
+  database: "${stackDatabase}",
+  operations: "${stackOps}",
 };`}</code>
           </pre>
         </aside>

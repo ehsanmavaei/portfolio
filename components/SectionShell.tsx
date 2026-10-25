@@ -19,10 +19,10 @@ export function SectionShell({
     <section
       id={id}
       aria-labelledby={ariaLabelledby}
-      className={className}
+      className={`w-full max-w-full min-w-0 ${className}`}
     >
       <div
-        className={`mx-auto max-w-[1120px] px-6 py-[72px] ${innerClassName}`}
+        className={`mx-auto w-full max-w-[1120px] min-w-0 px-4 py-12 sm:px-6 sm:py-16 md:py-[72px] ${innerClassName}`}
       >
         {children}
       </div>
