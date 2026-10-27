@@ -171,15 +171,6 @@ export function MavitoCaseStudy({ locale, dict }: SectionProps) {
         </ul>
       </article>
 
-      <article className="mt-10 rounded-[12px] border border-dashed border-border bg-page-bg px-4 py-4">
-        <h3 className="text-base font-bold text-text">
-          {dict.mavito.deploymentTodoTitle}
-        </h3>
-        <p className="mt-2 text-sm leading-relaxed text-text-muted">
-          {m.deploymentTodo[locale]}
-        </p>
-      </article>
-
       <div className="mt-12">
         <h3 className="text-base font-bold text-text">{dict.mavito.featuresTitle}</h3>
 
@@ -190,22 +181,23 @@ export function MavitoCaseStudy({ locale, dict }: SectionProps) {
           <FeatureList items={status.production[locale]} />
         </div>
 
-        <div className="mt-8">
-          <h4 className="text-sm font-semibold text-text">
-            {dict.mavito.featuresPartial}
-          </h4>
-          <FeatureList
-            items={status.partial[locale]}
-            emptyFallback={dict.mavito.featuresPartialEmpty}
-          />
-        </div>
+        {status.partial[locale].length > 0 ? (
+          <div className="mt-8">
+            <h4 className="text-sm font-semibold text-text">
+              {dict.mavito.featuresPartial}
+            </h4>
+            <FeatureList items={status.partial[locale]} />
+          </div>
+        ) : null}
 
-        <div className="mt-8">
-          <h4 className="text-sm font-semibold text-text">
-            {dict.mavito.featuresPlanned}
-          </h4>
-          <FeatureList items={status.planned[locale]} />
-        </div>
+        {status.planned[locale].length > 0 ? (
+          <div className="mt-8">
+            <h4 className="text-sm font-semibold text-text">
+              {dict.mavito.featuresPlanned}
+            </h4>
+            <FeatureList items={status.planned[locale]} />
+          </div>
+        ) : null}
       </div>
 
       <p className="mt-10 text-sm text-text-muted">{m.clients[locale]}</p>

@@ -26,7 +26,7 @@ export function AboutExperience({ locale, dict, showPhoto }: SectionProps) {
                 <div className="relative mx-auto size-[120px] shrink-0 overflow-hidden rounded-full border border-border bg-tag-bg shadow-[0_4px_12px_rgb(16_24_40_/_0.08)] sm:mx-0 md:size-40">
                   <Image
                     src={site.photoPath}
-                    alt={site.name[locale]}
+                    alt={site.photoAlt[locale]}
                     width={160}
                     height={160}
                     loading="lazy"

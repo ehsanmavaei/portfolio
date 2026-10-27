@@ -23,8 +23,10 @@ export const site = {
   },
   email: "ehsanmavaei@gmail.com",
   github: "",
-  /** TODO: Set your LinkedIn profile URL to show the link in the hero and contact sections. */
+  /** Set your LinkedIn profile URL to show the link in the hero, contact, and JSON-LD sameAs. */
   linkedin: "",
+  /** Set your Medium profile URL for JSON-LD sameAs. */
+  medium: "",
   instagram: "https://www.instagram.com/ehsancodes",
   instagramHandle: "@ehsancodes",
   resumeUrl: "",
@@ -146,6 +148,10 @@ export const site = {
     },
   },
   photoPath: "/images/me.webp",
+  photoAlt: {
+    en: "Portrait photo of Ehsan Mavaei",
+    fa: "عکس پرتره احسان ماوایی",
+  },
   mavito: {
     name: { en: "Mavito", fa: "ماویتو" },
     liveUrl: "https://mavito.ir",
@@ -218,10 +224,6 @@ export const site = {
         "طراحی سطح دسترسی تا هر نقش فقط آنچه روی تبلت سالن و پنل نیاز دارد ببیند",
       ],
     },
-    deploymentTodo: {
-      en: "TODO (your input): Add 1–2 sentences on how Mavito is deployed and monitored in production (provider, release process).",
-      fa: "TODO (ورودی شما): ۱–۲ جمله درباره استقرار و پایش production ماویتو (ارائه‌دهنده، فرآیند انتشار).",
-    },
     featureStatus: {
       production: {
         en: [
@@ -252,12 +254,8 @@ export const site = {
         fa: [] as readonly string[],
       },
       planned: {
-        en: [
-          "Table reservations (confirm in your admin before promoting publicly)",
-        ],
-        fa: [
-          "رزرو میز (قبل از تبلیغ عمومی در پنل خود تأیید کنید)",
-        ],
+        en: [] as readonly string[],
+        fa: [] as readonly string[],
       },
     },
     clients: {
@@ -283,9 +281,9 @@ export function getKnowsAbout(): string[] {
 export function getPersonSameAs(): string[] {
   const links = [
     site.instagram,
-    site.github,
     site.linkedin,
-    site.mavito.liveUrl,
+    site.github,
+    site.medium,
   ];
   return links.filter(isFilled);
 }

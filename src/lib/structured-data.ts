@@ -30,15 +30,12 @@ export function buildStructuredDataGraph(
     jobTitle: site.title[locale],
     url: pageUrl,
     ...(personImage ? { image: personImage } : {}),
-    email: site.email,
-    description: site.seo.description[locale],
-    knowsAbout: getKnowsAbout(),
-    sameAs: getPersonSameAs(),
     worksFor: {
       "@type": "Organization",
       name: site.mavito.name.en,
       url: site.mavito.liveUrl,
     },
+    sameAs: getPersonSameAs(),
   };
 
   const website = {

@@ -1,14 +1,15 @@
+/** Canonical production origin (no trailing slash). */
+export const productionSiteUrl = "https://ehsanmavaei.ir";
+
 function normalizeSiteUrl(raw: string | undefined): string {
-  return (raw ?? "").trim().replace(/\/$/, "");
+  const trimmed = (raw ?? "").trim().replace(/\/$/, "");
+  if (trimmed.includes("workers.dev")) {
+    return productionSiteUrl;
+  }
+  return trimmed;
 }
 
 const resolved = normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
-
-if (!resolved && process.env.npm_lifecycle_event === "build") {
-  throw new Error(
-    "NEXT_PUBLIC_SITE_URL is required for production builds. Set it in your environment or .env.local (no trailing slash), e.g. NEXT_PUBLIC_SITE_URL=https://your-domain.com",
-  );
-}
 
 /** Absolute site origin from env; empty in dev when unset. Required at `next build` time. */
 export const siteUrl = resolved;
@@ -26,17 +27,11 @@ export function getSiteOrigin(): string {
   if (process.env.NODE_ENV === "development") {
     return devOrigin();
   }
-  return "";
+  return productionSiteUrl;
 }
 
 export function getMetadataBase(): URL {
-  const origin = getSiteOrigin();
-  if (!origin) {
-    throw new Error(
-      "NEXT_PUBLIC_SITE_URL is required. Set it in your environment or .env.local (no trailing slash), e.g. NEXT_PUBLIC_SITE_URL=https://your-domain.com",
-    );
-  }
-  return new URL(origin);
+  return new URL(productionSiteUrl);
 }
 
 export function absoluteUrl(path: string): string {

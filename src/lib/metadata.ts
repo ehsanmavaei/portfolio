@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/config/site";
 import { absoluteUrl, getMetadataBase, site } from "@/config/site";
-import { localeAlternates } from "@/lib/structured-data";
-
 const ogImagePath = "/images/og.png";
+
+function localeAlternatePaths() {
+  return {
+    en: "/en/",
+    fa: "/fa/",
+    "x-default": "/en/",
+  };
+}
 
 function ogImageMeta(locale: Locale) {
   return {
@@ -16,7 +22,7 @@ function ogImageMeta(locale: Locale) {
 
 export function createLocaleMetadata(locale: Locale): Metadata {
   const path = `/${locale}/`;
-  const canonical = absoluteUrl(path);
+  const pageUrl = absoluteUrl(path);
   const title = site.seo.title[locale];
   const description = site.seo.description[locale];
   const ogLocale = locale === "fa" ? "fa_IR" : "en_US";
@@ -26,11 +32,10 @@ export function createLocaleMetadata(locale: Locale): Metadata {
     metadataBase: getMetadataBase(),
     title: { absolute: title },
     description,
-    keywords: [...site.seo.keywords[locale]],
     openGraph: {
       title,
       description,
-      url: canonical,
+      url: pageUrl,
       siteName: site.name[locale],
       type: "website",
       locale: ogLocale,
@@ -44,14 +49,13 @@ export function createLocaleMetadata(locale: Locale): Metadata {
       images: [absoluteUrl(ogImagePath)],
     },
     alternates: {
-      canonical,
-      languages: localeAlternates(),
+      canonical: path,
+      languages: localeAlternatePaths(),
     },
   };
 }
 
 export function createRootMetadata(): Metadata {
-  const canonical = absoluteUrl("/en/");
   const title = site.seo.title.en;
   const description = site.seo.description.en;
 
@@ -60,13 +64,13 @@ export function createRootMetadata(): Metadata {
     title: { absolute: title },
     description,
     alternates: {
-      canonical,
-      languages: localeAlternates(),
+      canonical: "/en/",
+      languages: localeAlternatePaths(),
     },
     openGraph: {
       title,
       description,
-      url: absoluteUrl("/"),
+      url: absoluteUrl("/en/"),
       type: "website",
       locale: "en_US",
       alternateLocale: ["fa_IR"],
