@@ -5,13 +5,9 @@ import { createRootMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createRootMetadata();
 
-const localeRedirectScript = `(function(){var l=navigator.language||"";location.replace(l.indexOf("fa")===0?"/fa/":"/en/");})();`;
-
 export default function RootPage() {
   return (
-    <>
-      <script dangerouslySetInnerHTML={{ __html: localeRedirectScript }} />
-      <main className="mx-auto max-w-lg px-4 py-16 text-center sm:px-6">
+    <main className="mx-auto max-w-lg px-4 py-16 text-center sm:px-6">
         <p className="text-sm text-text-muted">
           <Link
             href="/en/"
@@ -28,6 +24,5 @@ export default function RootPage() {
           </Link>
         </p>
       </main>
-    </>
   );
 }

@@ -24,9 +24,6 @@ export default function RootGroupLayout({
       suppressHydrationWarning
       className={htmlFontClassName()}
     >
-      <head>
-        <meta httpEquiv="refresh" content="0; url=/en/" />
-      </head>
       <body className="min-h-full bg-page-bg font-sans text-text antialiased">
         {children}
       </body>

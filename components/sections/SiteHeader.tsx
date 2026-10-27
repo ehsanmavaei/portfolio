@@ -53,7 +53,7 @@ export function SiteHeader({ locale, dict }: LocaleDictProps) {
         >
           <Image
             src="/logo.svg"
-            alt={dict.nav.primary}
+            alt={site.name[locale]}
             width={32}
             height={32}
             className="size-8 shrink-0 rounded-[8px]"
