@@ -68,6 +68,16 @@ export function MavitoCaseStudy({ locale, dict }: SectionProps) {
           {m.name[locale]}
         </h2>
         <p className="mt-2 text-lg text-text-muted">{dict.mavito.tagline}</p>
+        <p className="mt-3 text-sm leading-relaxed">
+          <a
+            href={m.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-text-muted underline-offset-4 hover:text-text hover:underline ${focusRing} rounded-[8px]`}
+          >
+            {dict.mavito.visitLive}
+          </a>
+        </p>
         <div className="mt-6 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap">
           <a
             href={m.liveUrl}
