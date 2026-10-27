@@ -4,13 +4,14 @@ import { htmlFontClassName, rootViewport } from "../fonts";
 import "../globals.css";
 
 export const viewport = rootViewport;
-
+ 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
+  
   params: Promise<{ locale: string }>;
 };
 
